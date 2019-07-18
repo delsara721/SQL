@@ -1,0 +1,390 @@
+Delsey Sabu
+MYSQL #4
+
+1. 
+mysql> select ICDescription, IngredientName from ingredientClasses JOIN ingredients where (ingredientClasses.IngredientClassID = ingredients.IngredientClassID) limit 25;
++---------------+-----------------------+
+| ICDescription | IngredientName        |
++---------------+-----------------------+
+| Meat          | Beef                  |
+| Vegetable     | Onion                 |
+| Liquid        | Water                 |
+| Liquid        | Guinness Beer         |
+| Vegetable     | Potato                |
+| Vegetable     | Carrot                |
+| Vegetable     | Tomato                |
+| Vegetable     | Jalapeno              |
+| Spice         | Garlic                |
+| Spice         | Black Pepper (ground) |
+| Spice         | Salt                  |
+| Seafood       | Halibut               |
+| Meat          | Chicken, Fryer        |
+| Meat          | Bacon                 |
+| Vegetable     | Romaine Lettuce       |
+| Vegetable     | Iceberg Lettuce       |
+| Vegetable     | Butterhead Lettuce    |
+| Seafood       | Scallop               |
+| Seafood       | Salmon                |
+| Liquid        | Vinegar               |
+| Oil           | Olive Oil             |
+| Vegetable     | Cucumber              |
+| Vegetable     | Mushrooms             |
+| Liquid        | Red Wine              |
+| Liquid        | White Wine            |
++---------------+-----------------------+
+25 rows in set (0.01 sec)
+
+
+2. 
+mysql> select ICDescription, IngredientName from ingredientClasses,ingredients where (ingredientClasses.IngredientClassID = ingredients.IngredientClassID) limit 25;
++---------------+-----------------------+
+| ICDescription | IngredientName        |
++---------------+-----------------------+
+| Meat          | Beef                  |
+| Vegetable     | Onion                 |
+| Liquid        | Water                 |
+| Liquid        | Guinness Beer         |
+| Vegetable     | Potato                |
+| Vegetable     | Carrot                |
+| Vegetable     | Tomato                |
+| Vegetable     | Jalapeno              |
+| Spice         | Garlic                |
+| Spice         | Black Pepper (ground) |
+| Spice         | Salt                  |
+| Seafood       | Halibut               |
+| Meat          | Chicken, Fryer        |
+| Meat          | Bacon                 |
+| Vegetable     | Romaine Lettuce       |
+| Vegetable     | Iceberg Lettuce       |
+| Vegetable     | Butterhead Lettuce    |
+| Seafood       | Scallop               |
+| Seafood       | Salmon                |
+| Liquid        | Vinegar               |
+| Oil           | Olive Oil             |
+| Vegetable     | Cucumber              |
+| Vegetable     | Mushrooms             |
+| Liquid        | Red Wine              |
+| Liquid        | White Wine            |
++---------------+-----------------------+
+25 rows in set (0.01 sec)
+
+3. 
+mysql> select RCDescription, RecipeTitle from recipeClasses JOIN recipes where (recipeClasses.RecipeClassID = recipes.RecipeClassID) order by RCDescription,RecipeTitle;
++----------------+-------------------------------------------------------+
+| RCDescription  | RecipeTitle                                           |
++----------------+-------------------------------------------------------+
+| Dessert        | Coupe Colonel                                         |
+| Dessert        | Trifle                                                |
+| Hors d'oeuvres | Machos Nachos                                         |
+| Hors d'oeuvres | Salsa Buena                                           |
+| Main course    | Fettuccini Alfredo                                    |
+| Main course    | Huachinango Veracruzana (Red Snapper, Veracruz style) |
+| Main course    | Irish Stew                                            |
+| Main course    | Pollo Picoso                                          |
+| Main course    | Roast Beef                                            |
+| Main course    | Salmon Filets in Parchment Paper                      |
+| Main course    | Tourtière (French-Canadian Pork Pie)                  |
+| Salad          | Mike's Summer Salad                                   |
+| Starch         | Yorkshire Pudding                                     |
+| Vegetable      | Asparagus                                             |
+| Vegetable      | Garlic Green Beans                                    |
++----------------+-------------------------------------------------------+
+15 rows in set (0.01 sec)
+
+4. 
+
+mysql> select IngredientName,ICDescription, MDescription from ingredients,ingredientClasses,measurements where (ingredientClasses.IngredientClassID = ingredients.IngredientClassID AND ingredients.MeasureAmountID = measurements.MeasureAmountID) limit 20;
++-----------------------+---------------+--------------+
+| IngredientName        | ICDescription | MDescription |
++-----------------------+---------------+--------------+
+| Beef                  | Meat          | Ounce        |
+| Onion                 | Vegetable     | Whole        |
+| Water                 | Liquid        | Ounce        |
+| Guinness Beer         | Liquid        | Ounce        |
+| Potato                | Vegetable     | Cup          |
+| Carrot                | Vegetable     | Cup          |
+| Tomato                | Vegetable     | Slice        |
+| Jalapeno              | Vegetable     | Cup          |
+| Garlic                | Spice         | Clove        |
+| Black Pepper (ground) | Spice         | Teaspoon     |
+| Salt                  | Spice         | Teaspoon     |
+| Halibut               | Seafood       | Pound        |
+| Chicken, Fryer        | Meat          | Pound        |
+| Bacon                 | Meat          | Slice        |
+| Romaine Lettuce       | Vegetable     | Head         |
+| Iceberg Lettuce       | Vegetable     | Head         |
+| Butterhead Lettuce    | Vegetable     | Head         |
+| Scallop               | Seafood       | Pound        |
+| Salmon                | Seafood       | Pound        |
+| Vinegar               | Liquid        | Ounce        |
++-----------------------+---------------+--------------+
+20 rows in set (0.07 sec)
+
+5. 
+mysql> select IngredientName,ICDescription, MDescription from ingredients,ingredientClasses,measurements where (ingredientClasses.IngredientClassID = ingredients.IngredientClassID AND ingredients.MeasureAmountID = measurements.MeasureAmountID AND(ICDescription = "Spice" OR ICDescription="Condiment"));
++-------------------------+---------------+--------------+
+| IngredientName          | ICDescription | MDescription |
++-------------------------+---------------+--------------+
+| Garlic                  | Spice         | Clove        |
+| Black Pepper (ground)   | Spice         | Teaspoon     |
+| Salt                    | Spice         | Teaspoon     |
+| Black Olives            | Condiment     | Cup          |
+| Mustard, Regular        | Condiment     | Ounce        |
+| Mustard, Dijon          | Condiment     | Ounce        |
+| Ketchup                 | Condiment     | Ounce        |
+| Green Olives            | Condiment     | Cup          |
+| White Pepper (ground)   | Spice         | Ounce        |
+| Cayenne Pepper, Ground  | Spice         | Ounce        |
+| Colored sugar sprinkles | Spice         | Teaspoon     |
+| Nutmeg                  | Spice         | Teaspoon     |
+| Cinnamon                | Spice         | Teaspoon     |
+| Ground Clove            | Spice         | Teaspoon     |
++-------------------------+---------------+--------------+
+14 rows in set (0.04 sec)
+
+6. 
+mysql> select distinct IngredientName from ingredients order by IngredientName limit 15;
++-------------------------------+
+| IngredientName                |
++-------------------------------+
+| Asparagus                     |
+| Bacon                         |
+| Balsamic Vinaigrette Dressing |
+| Beef                          |
+| Beef drippings                |
+| Bird's Custard Powder         |
+| Black Olives                  |
+| Black Pepper (ground)         |
+| Blue Cheese                   |
+| Bread Crumbs                  |
+| Butter                        |
+| Butterhead Lettuce            |
+| Canned tomatoes               |
+| Carrot                        |
+| Cayenne Pepper, Ground        |
++-------------------------------+
+15 rows in set (0.01 sec)
+
+7. 
+mysql> select count(distinct IngredientID) as NumOfIngredients,RecipeTitle from recipeIngredients,recipes where (recipeIngredients.RecipeID = recipes.RecipeID AND recipes.RecipeTitle = "trifle");
++------------------+-------------+
+| NumOfIngredients | RecipeTitle |
++------------------+-------------+
+|                5 | Trifle      |
++------------------+-------------+
+1 row in set (0.11 sec)
+
+8. 
+mysql> select count(distinct IngredientID) as NumOfIngredients,RecipeTitle from recipeIngredients,recipes where (recipeIngredients.RecipeID = recipes.RecipeID ) group by RecipeTitle order by NumOfIngredients;
++------------------+-------------------------------------------------------+
+| NumOfIngredients | RecipeTitle                                           |
++------------------+-------------------------------------------------------+
+|                2 | Coupe Colonel                                         |
+|                3 | Asparagus                                             |
+|                3 | Garlic Green Beans                                    |
+|                4 | Roast Beef                                            |
+|                5 | Salsa Buena                                           |
+|                5 | Trifle                                                |
+|                5 | Machos Nachos                                         |
+|                6 | Yorkshire Pudding                                     |
+|                6 | Irish Stew                                            |
+|                6 | Mike's Summer Salad                                   |
+|                6 | Pollo Picoso                                          |
+|                7 | Fettuccini Alfredo                                    |
+|                8 | Tourtière (French-Canadian Pork Pie)                  |
+|               10 | Salmon Filets in Parchment Paper                      |
+|               12 | Huachinango Veracruzana (Red Snapper, Veracruz style) |
++------------------+-------------------------------------------------------+
+15 rows in set (0.01 sec)
+9.
+mysql> select IngredientName,amount,MDescription from ingredients,recipeIngredients,measurements,recipes where (recipeIngredients.IngredientID = ingredients.IngredientID AND ingredients.MeasureAmountId = measurements.MeasureAmountID AND recipeIngredients.RecipeID = recipes.RecipeID AND recipes.RecipeTitle = "YorkShire Pudding");
++----------------+--------+--------------+
+| IngredientName | amount | MDescription |
++----------------+--------+--------------+
+| Flour          |    1.5 | Cup          |
+| Water          |      1 | Ounce        |
+| Eggs           |      2 | Piece        |
+| Salt           |    0.5 | Teaspoon     |
+| Milk           |    0.5 | Cup          |
+| Beef drippings |      4 | Teaspoon     |
++----------------+--------+--------------+
+6 rows in set (0.01 sec)
+
+10.
+mysql> select * from ingredients LEFT JOIN recipeIngredients ON (ingredients.IngredientID = recipeIngredients.IngredientID) where RecipeID IS NULL;
++--------------+--------------------+-------------------+-----------------+----------+-------------+--------------+-----------------+--------+
+| IngredientID | IngredientName     | IngredientClassID | MeasureAmountID | RecipeID | RecipeSeqNo | IngredientID | MeasureAmountID | amount |
++--------------+--------------------+-------------------+-----------------+----------+-------------+--------------+-----------------+--------+
+|           12 | Halibut            |                10 |               5 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           13 | Chicken, Fryer     |                 2 |               5 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           14 | Bacon              |                 2 |               8 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           16 | Iceberg Lettuce    |                 3 |              13 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           17 | Butterhead Lettuce |                 3 |              13 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           18 | Scallop            |                10 |               5 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           20 | Vinegar            |                 9 |               1 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           24 | Red Wine           |                 9 |               2 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           33 | Chicken, Pre-cut   |                 2 |              17 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           34 | T-bone Steak       |                 2 |              17 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           35 | Chicken Breast     |                 2 |               7 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           37 | Chicken Wing       |                 2 |               7 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           39 | New York Steak     |                 2 |              17 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           40 | Spaghetti          |                 5 |               1 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           41 | Mustard, Regular   |                19 |               1 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           42 | Mustard, Dijon     |                19 |               1 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           43 | Ketchup            |                19 |               1 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           44 | Salsa              |                13 |               1 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           46 | Blue Cheese        |                12 |               1 |     NULL |        NULL |         NULL |            NULL |   NULL |
+|           48 | Green Onion        |                 3 |              14 |     NULL |        NULL |         NULL |            NULL |   NULL |
++--------------+--------------------+-------------------+-----------------+----------+-------------+--------------+-----------------+--------+
+
+11.
+mysql> select RecipeID,RecipeSeqNo from recipeIngredients limit 20;
++----------+-------------+
+| RecipeID | RecipeSeqNo |
++----------+-------------+
+|        1 |           1 |
+|        1 |           2 |
+|        1 |           3 |
+|        1 |           4 |
+|        1 |           5 |
+|        1 |           6 |
+|        2 |           1 |
+|        2 |           2 |
+|        2 |           3 |
+|        2 |           4 |
+|        2 |           5 |
+|        3 |           1 |
+|        3 |           2 |
+|        3 |           3 |
+|        3 |           4 |
+|        3 |           5 |
+|        4 |           1 |
+|        4 |           2 |
+|        4 |           3 |
+|        5 |           1 |
++----------+-------------+
+20 rows in set (0.01 sec)
+
+12. 
+mysql> select RecipeID, RecipeTitle from recipes where RecipeID<10;
++----------+---------------------+
+| RecipeID | RecipeTitle         |
++----------+---------------------+
+|        1 | Irish Stew          |
+|        2 | Salsa Buena         |
+|        3 | Machos Nachos       |
+|        4 | Garlic Green Beans  |
+|        5 | Fettuccini Alfredo  |
+|        6 | Pollo Picoso        |
+|        7 | Mike's Summer Salad |
+|        8 | Trifle              |
+|        9 | Roast Beef          |
++----------+---------------------+
+9 rows in set (0.02 sec)
+
+13. 
+mysql> (select RecipeID from recipes) UNION (select RecipeID from recipeIngredients);
++----------+
+| RecipeID |
++----------+
+|        1 |
+|        2 |
+|        3 |
+|        4 |
+|        5 |
+|        6 |
+|        7 |
+|        8 |
+|        9 |
+|       10 |
+|       11 |
+|       12 |
+|       13 |
+|       14 |
+|       15 |
++----------+
+15 rows in set (0.01 sec)
+
+14. 
+mysql> select * from ingredients NATURAL JOIN ingredientClasses limit 20;
++-------------------+--------------+-----------------------+-----------------+---------------+
+| IngredientClassID | IngredientID | IngredientName        | MeasureAmountID | ICDescription |
++-------------------+--------------+-----------------------+-----------------+---------------+
+|                 2 |            1 | Beef                  |               1 | Meat          |
+|                 3 |            2 | Onion                 |              17 | Vegetable     |
+|                 9 |            3 | Water                 |               1 | Liquid        |
+|                 9 |            4 | Guinness Beer         |               1 | Liquid        |
+|                 3 |            5 | Potato                |               2 | Vegetable     |
+|                 3 |            6 | Carrot                |               2 | Vegetable     |
+|                 3 |            7 | Tomato                |               8 | Vegetable     |
+|                 3 |            8 | Jalapeno              |               2 | Vegetable     |
+|                 1 |            9 | Garlic                |              16 | Spice         |
+|                 1 |           10 | Black Pepper (ground) |               3 | Spice         |
+|                 1 |           11 | Salt                  |               3 | Spice         |
+|                10 |           12 | Halibut               |               5 | Seafood       |
+|                 2 |           13 | Chicken, Fryer        |               5 | Meat          |
+|                 2 |           14 | Bacon                 |               8 | Meat          |
+|                 3 |           15 | Romaine Lettuce       |              13 | Vegetable     |
+|                 3 |           16 | Iceberg Lettuce       |              13 | Vegetable     |
+|                 3 |           17 | Butterhead Lettuce    |              13 | Vegetable     |
+|                10 |           18 | Scallop               |               5 | Seafood       |
+|                10 |           19 | Salmon                |               5 | Seafood       |
+|                 9 |           20 | Vinegar               |               1 | Liquid        |
++-------------------+--------------+-----------------------+-----------------+---------------+
+20 rows in set (0.01 sec)
+
+15.
+mysql> select * from ingredients NATURAL JOIN ingredientClasses where (ingredients.IngredientClassID = ingredientClasses.IngredientClassID) limit 20;
++-------------------+--------------+-----------------------+-----------------+---------------+
+| IngredientClassID | IngredientID | IngredientName        | MeasureAmountID | ICDescription |
++-------------------+--------------+-----------------------+-----------------+---------------+
+|                 2 |            1 | Beef                  |               1 | Meat          |
+|                 3 |            2 | Onion                 |              17 | Vegetable     |
+|                 9 |            3 | Water                 |               1 | Liquid        |
+|                 9 |            4 | Guinness Beer         |               1 | Liquid        |
+|                 3 |            5 | Potato                |               2 | Vegetable     |
+|                 3 |            6 | Carrot                |               2 | Vegetable     |
+|                 3 |            7 | Tomato                |               8 | Vegetable     |
+|                 3 |            8 | Jalapeno              |               2 | Vegetable     |
+|                 1 |            9 | Garlic                |              16 | Spice         |
+|                 1 |           10 | Black Pepper (ground) |               3 | Spice         |
+|                 1 |           11 | Salt                  |               3 | Spice         |
+|                10 |           12 | Halibut               |               5 | Seafood       |
+|                 2 |           13 | Chicken, Fryer        |               5 | Meat          |
+|                 2 |           14 | Bacon                 |               8 | Meat          |
+|                 3 |           15 | Romaine Lettuce       |              13 | Vegetable     |
+|                 3 |           16 | Iceberg Lettuce       |              13 | Vegetable     |
+|                 3 |           17 | Butterhead Lettuce    |              13 | Vegetable     |
+|                10 |           18 | Scallop               |               5 | Seafood       |
+|                10 |           19 | Salmon                |               5 | Seafood       |
+|                 9 |           20 | Vinegar               |               1 | Liquid        |
++-------------------+--------------+-----------------------+-----------------+---------------+
+20 rows in set (0.01 sec)
+
+16.
+mysql> select ICDescription, IngredientName, MDescription from ingredientClasses NATURAL JOIN ingredients NATURAL JOIN measurements limit 20;
++---------------+-----------------------+--------------+
+| ICDescription | IngredientName        | MDescription |
++---------------+-----------------------+--------------+
+| Meat          | Beef                  | Ounce        |
+| Vegetable     | Onion                 | Whole        |
+| Liquid        | Water                 | Ounce        |
+| Liquid        | Guinness Beer         | Ounce        |
+| Vegetable     | Potato                | Cup          |
+| Vegetable     | Carrot                | Cup          |
+| Vegetable     | Tomato                | Slice        |
+| Vegetable     | Jalapeno              | Cup          |
+| Spice         | Garlic                | Clove        |
+| Spice         | Black Pepper (ground) | Teaspoon     |
+| Spice         | Salt                  | Teaspoon     |
+| Seafood       | Halibut               | Pound        |
+| Meat          | Chicken, Fryer        | Pound        |
+| Meat          | Bacon                 | Slice        |
+| Vegetable     | Romaine Lettuce       | Head         |
+| Vegetable     | Iceberg Lettuce       | Head         |
+| Vegetable     | Butterhead Lettuce    | Head         |
+| Seafood       | Scallop               | Pound        |
+| Seafood       | Salmon                | Pound        |
+| Liquid        | Vinegar               | Ounce        |
++---------------+-----------------------+--------------+
+20 rows in set (0.01 sec)
